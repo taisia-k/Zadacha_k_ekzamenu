@@ -113,3 +113,75 @@ mkdir build
 cd build
 cmake ..
 cmake --build .
+
+
+
+Запуск:
+./online_store
+
+Пример меню:
+Меню администратора:
+1. Добавить новый продукт
+2. Обновить информацию о продукте
+3. Удалить продукт
+4. Просмотр всех заказов
+5. Изменить статус заказа
+6. Просмотр истории статусов заказа
+7. Просмотр журнала аудита
+8. Сформировать отчёт (CSV)
+9. Выход
+> 4
+
+order_id=1 user=3 status=completed total=350.00 date=2026-01-10 14:22:05
+order_id=2 user=3 status=pending   total=100.00 date=2026-01-12 09:11:37
+
+
+Меню менеджера:
+1. Просмотр заказов в ожидании утверждения
+2. Утвердить заказ
+3. Обновить количество товара на складе
+4. Изменить статус заказа
+5. Выход
+> 1
+
+pending order 2 user=3 total=100.00
+
+> 2
+order_id:
+> 2
+
+Заказ 2 успешно утверждён.
+
+
+Меню покупателя:
+1. Создать новый заказ
+2. Просмотр статуса заказа
+3. Оплатить заказ
+4. Оформить возврат заказа
+5. Выход
+> 1
+
+product_id quantity:
+> 1 2
+
+Заказ успешно создан.
+
+
+Пример логов:
+
+entity_type | entity_id | operation | performed_by | performed_at           | details
+------------------------------------------------------------------------------------
+order       | 1         | insert    | 3            | 2026-01-10 14:20:01    | createOrder
+order       | 1         | update    | 2            | 2026-01-10 14:22:05    | status: pending -> completed
+order       | 1         | update    | 3            | 2026-01-13 18:40:10    | status: completed -> returned
+product     | 2         | update    | 0            | 2026-01-12 11:03:44    | price changed, orders recalculated
+
+Пример истории изменения заказа:
+
+entity_type | entity_id | operation | performed_by | performed_at           | details
+------------------------------------------------------------------------------------
+order       | 1         | insert    | 3            | 2026-01-10 14:20:01    | createOrder
+order       | 1         | update    | 2            | 2026-01-10 14:22:05    | status: pending -> completed
+order       | 1         | update    | 3            | 2026-01-13 18:40:10    | status: completed -> returned
+product     | 2         | update    | 0            | 2026-01-12 11:03:44    | price changed, orders recalculated
+
