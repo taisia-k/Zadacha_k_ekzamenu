@@ -7,7 +7,6 @@ std::string quote(DatabaseConnection<std::string>& db, const std::string& s) {
     return db.raw().quote(s);
 }
 
-// Лямбда-проверка прав (по ТЗ)
 bool canAccessAudit(const User& u) {
     auto access = [](Role r){ return r == Role::Admin; };
     return access(u.role());
